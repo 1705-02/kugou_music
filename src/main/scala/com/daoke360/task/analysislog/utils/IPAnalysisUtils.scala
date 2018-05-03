@@ -9,16 +9,4 @@ import scala.collection.mutable
   */
 object IPAnalysisUtils {
 
-  def analysisLog(logText:String,ipRules:Array[IPRule]) = {
-    var eventLogMap:mutable.HashMap[String,String] = null
-    if(StringUtils.isNotBlank(logText)){
-      val field = logText.split(GlobalContants.LOG_SPLIT_FLAG)
-      if(field.length == 8){
-        eventLogMap = new mutable.HashMap[String,String]()
-        eventLogMap.put(EventLogContants.LOG_COLUMN_NAME_IP,field(0))
-        eventLogMap.put(EventLogContants.LOG_COLUMN_NAME_ACCESS_TIME,field(4))
-
-      }
-    }
-  }
 }
