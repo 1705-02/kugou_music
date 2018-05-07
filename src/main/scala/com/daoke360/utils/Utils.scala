@@ -11,9 +11,7 @@ import scala.collection.JavaConversions.mapAsScalaMap
 import scala.collection.mutable
 import scala.util.parsing.json.JSONObject
 
-/**
-  * Created by lenovo on 2018/5/3.
-  */
+
 object Utils {
   /**
     * 将指定格式的日期转换成long类型的时间戳

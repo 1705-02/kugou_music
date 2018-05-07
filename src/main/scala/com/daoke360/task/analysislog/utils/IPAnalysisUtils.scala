@@ -5,9 +5,7 @@ package com.daoke360.task.analysislog.utils
 import com.daoke360.caseclass.{IPRule, RegionInfo}
 
 import scala.util.control.Breaks._
-/**
-  * Created by tian on 2018/5/6.
-  */
+
 object IpAnalysisUtils {
   /**
     * 将对应ip的地理信息查找出来

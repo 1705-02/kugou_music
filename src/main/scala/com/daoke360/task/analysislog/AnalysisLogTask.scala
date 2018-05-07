@@ -3,7 +3,7 @@ package com.daoke360.task.analysislog
 
 
 import com.daoke360.caseclass.IPRule
-import com.daoke360.common.{EventLogCountans, GlobalCountans}
+import com.daoke360.common.{GlobalContants, EventLogCountans, GlobalCountans}
 import com.daoke360.task.analysislog.utils.LogAnalysisUtils
 import com.daoke360.utils.Utils
 import org.apache.hadoop.conf.Configuration
@@ -16,9 +16,7 @@ import org.apache.spark.{SparkConf, SparkContext, SparkException}
 
 
 
-/**
-  * Created by Administrator on 2018/5/3.
-  */
+
 object AnalysisLogTask {
   /**
     * 验证输入参数是否正确
@@ -27,9 +25,9 @@ object AnalysisLogTask {
     * @param sparkConf
     */
   def processArgs(args: Array[String], sparkConf: SparkConf) = {
-    if (args.length >= 2 && args(0).equals(GlobalCountans.TASK_PARAMS_FLAG) && Utils.validateInpuDate(args(1))) {
-      sparkConf.set(GlobalCountans.TASK_RUN_DATE, args(1))
-      println(sparkConf.get(GlobalCountans.TASK_RUN_DATE))
+    if (args.length >= 2 && args(0).equals(GlobalContants.TASK_PARAMS_FLAG) && Utils.validateInpuDate(args(1))) {
+      sparkConf.set(GlobalContants.TASK_RUN_DATE, args(1))
+      println(sparkConf.get(GlobalContants.TASK_RUN_DATE))
     } else {
       throw new SparkException(
         """
@@ -50,13 +48,13 @@ object AnalysisLogTask {
     var fs: FileSystem = null
     try {
       //将字符串日期转换成long类型的时间戳
-      val longTime = Utils.parseDate2Long(sparkConf.get(GlobalCountans.TASK_RUN_DATE), "yyyy-MM-dd")
+      val longTime = Utils.parseDate2Long(sparkConf.get(GlobalContants.TASK_RUN_DATE), "yyyy-MM-dd")
       //将时间戳转换成指定格式的日期
       val inputDate = Utils.formatDate(longTime, "yyyy/MM/dd")
-      val inputPath = new Path(GlobalCountans.LOG_DIR_PREFIX + inputDate)
+      val inputPath = new Path(GlobalContants.LOG_DIR_PREFIX + inputDate)
       fs = FileSystem.newInstance(new Configuration())
       if (fs.exists(inputPath)) {
-        sparkConf.set(GlobalCountans.TASK_INPUT_PATH, inputPath.toString)
+        sparkConf.set(GlobalContants.TASK_INPUT_PATH, inputPath.toString)
       } else {
         throw new Exception("not found input path of task....")
       }
@@ -100,7 +98,7 @@ object AnalysisLogTask {
     /**
       * 定义在算子外面的变量称之为外部变量，外部变量都是在driver上定义的
       */
-    val eventLogMap = sc.textFile(sparkConf.get(GlobalCountans.TASK_INPUT_PATH)).map(logText => {
+    val eventLogMap = sc.textFile(sparkConf.get(GlobalContants.TASK_INPUT_PATH)).map(logText => {
       LogAnalysisUtils.analysisLog(logText, ipRulesBroadCast.value)
     }).filter(x=>x!=null)
 

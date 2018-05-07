@@ -3,16 +3,14 @@ package com.daoke360.task.analysislog.utils
 import java.util.Base64
 
 import com.daoke360.caseclass.IPRule
-import com.daoke360.common.{EventLogCountans, GlobalCountans}
+import com.daoke360.common.{GlobalContants, EventLogCountans, GlobalCountans}
 import com.daoke360.utils.Utils
 import org.apache.commons.lang.StringUtils
 
 import scala.collection.mutable
 
 
-/**
-  * Created by tian on 2018/5/6.
-  */
+
 object LogAnalysisUtils {
   /**
     * 处理请求参数
@@ -91,8 +89,8 @@ object LogAnalysisUtils {
   def analysisLog(logTxt: String, ipRules: Array[IPRule]) = {
     var eventLogMap: mutable.HashMap[String, String] = null
     if (StringUtils.isNotBlank(logTxt)) {
-      if(logTxt.contains(GlobalCountans.DEL_FLAG)){
-        val field = logTxt.split(GlobalCountans.LOG_SPLIT_FLAG)
+      if(logTxt.contains(GlobalContants.DEL_FLAG)){
+        val field = logTxt.split(GlobalContants.LOG_SPLIT_FLAG)
         if (field.length == 8) {
           eventLogMap = new mutable.HashMap[String, String]()
           //用户ip
