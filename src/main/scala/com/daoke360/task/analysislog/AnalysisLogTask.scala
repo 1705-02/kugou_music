@@ -3,7 +3,7 @@ package com.daoke360.task.analysislog
 
 
 import com.daoke360.caseclass.IPRule
-import com.daoke360.common.{GlobalContants, EventLogCountans, GlobalCountans}
+import com.daoke360.common.{GlobalContants, EventLogCountans}
 import com.daoke360.task.analysislog.utils.LogAnalysisUtils
 import com.daoke360.utils.Utils
 import org.apache.hadoop.conf.Configuration
